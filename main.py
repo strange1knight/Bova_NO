@@ -4,16 +4,21 @@ from app.routers import items
 
 
 settings = Settings()
-app = FastAPI(title=settings.app_name)
+app = FastAPI(
+    title=settings.app_name,
+    description='Лабораторная работа по FastAPI',
+    version='1.0.0',
+    contact={'name': 'Студент', 'email': settings.admin_email},
+)
 app.include_router(items.router)
 
 
-@app.get('/')
+@app.get('/', summary='Проверить запуск приложения')
 def read_root():
     return {'message': 'Hello, FastAPI!'}
 
 
-@app.get('/info')
+@app.get('/info', summary='Посмотреть настройки приложения')
 def get_info():
     return {
         'app_name': settings.app_name,
