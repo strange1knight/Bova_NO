@@ -1,8 +1,11 @@
+import logging
+
 from fastapi import FastAPI
 from app.config import Settings
 from app.routers import items
 
 
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 settings = Settings()
 app = FastAPI(
     title=settings.app_name,
